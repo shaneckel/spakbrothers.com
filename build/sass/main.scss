@@ -81,8 +81,7 @@ body{
     margin: 0 .5rem;
     font-size: 1.6em;
   }
-  @media (orientation : landscape) {
-    // background: blue;
+  @media (orientation : landscape) and (max-width: 800px){
     padding: 1em 20%;
   }
 }
@@ -112,14 +111,7 @@ nav{
     top: -37em;
     border: 0;
     border-bottom: 1px solid #4f4f4f;
-  }
-  @media (orientation : landscape) {
-    padding: 1em 20%;
-    font-size: .4rem;
-    top: -20em;
-    .menu{
-      padding-top: 2em;
-    }
+
   }
   a{
     margin: .2rem 0;
@@ -144,9 +136,6 @@ nav{
           color: white;
         }
       }
-    }
-    @media (orientation : landscape) {
-      padding: .5em;
     }
   }
   a.active{
