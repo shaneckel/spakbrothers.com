@@ -77,14 +77,18 @@ body{
   padding: 0 0 5% 0;
   font-size: 2em;
   text-align: center;
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     margin: 0 .5rem;
     font-size: 1.6em;
+  }
+  @media (orientation : landscape) {
+    // background: blue;
+    padding: 1em 20%;
   }
 }
 
 nav.flip{
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     background: rgba(35, 31, 32, 0.90);
   }
   top: 0em;
@@ -104,11 +108,18 @@ nav{
   background: #231f20;
   box-shadow: 0px -1px 17px 0px rgba(0,0,0,0.75);
   z-index: 100;
-  @media (max-width: 600px){
+  @media (max-width: 800px){
     top: -37em;
     border: 0;
     border-bottom: 1px solid #4f4f4f;
-
+  }
+  @media (orientation : landscape) {
+    padding: 1em 20%;
+    font-size: .4rem;
+    top: -20em;
+    .menu{
+      padding-top: 2em;
+    }
   }
   a{
     margin: .2rem 0;
@@ -120,7 +131,7 @@ nav{
       background: white;
       color: #231f20;
     }
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       display: block;
       text-align: left;
       border: 0;
@@ -133,6 +144,9 @@ nav{
           color: white;
         }
       }
+    }
+    @media (orientation : landscape) {
+      padding: .5em;
     }
   }
   a.active{
@@ -147,7 +161,7 @@ nav{
       color: white;
     }
   }
-  @media (min-width: 600px) {
+  @media (min-width: 800px) {
     .menu{
       display: none;
     }
@@ -182,7 +196,7 @@ h3, h4{
   font-size: 1.2rem;
 
 }
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   section.phone, section.location{
     h3{
       margin: 1rem 1em
@@ -198,7 +212,7 @@ section.hours div{
     font-weight: 900;
     font-size: 2.8rem;
     margin-bottom: .5rem;
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       font-size: 1.2em;
       margin-bottom: 1rem;
     }
@@ -210,7 +224,7 @@ section.pizza{
     font-size: 1.12em;
     text-transform: uppercase;
     margin-top: 1.3em;
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       font-size: .98em;
       margin-top: 1.8em;
     }
@@ -242,19 +256,19 @@ aside.extras{
     width: 49%;
     h2{
       font-size: 1.4rem;
-      @media (max-width: 600px) {
+      @media (max-width: 800px) {
         font-size: 1rem;
       }
     }
     h3{
       font-size: .95rem;
-      @media (max-width: 600px) {
+      @media (max-width: 800px) {
         font-size: 1rem;
 
       }
       span{
         margin: 0 .5rem;
-        @media (max-width: 600px) {
+        @media (max-width: 800px) {
           display: block;
           color: #231f20;
           line-height: 0;
@@ -279,7 +293,7 @@ p.note, h5.note{
 
 
 section.toppings{
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     h3{
       margin: 1em 1.6em .4em 1.6em;
       line-height: 1.4em;
@@ -296,7 +310,7 @@ section.toppings{
     display: block;
     column-break-inside: avoid;
     padding: 2em 0;
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       column-count: 2;
     }
   }
@@ -304,7 +318,7 @@ section.toppings{
     font-size: 1.2rem;
     margin: 1rem 0;
     color: white;
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       font-size: 1rem;
     }
   }
@@ -328,7 +342,7 @@ section.salads{
     font-size: 1em;
     text-transform: uppercase;
     margin-top: 2em;
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       font-size: .9em;
       margin-top: 3.1em;
     }
@@ -341,7 +355,7 @@ section.salads{
     border-bottom: 1px dashed;
     padding-bottom: 1.6rem;
     padding-top: 1.6rem;
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       font-size: 1.3em;
     }
     &:not(:first-of-type){
@@ -355,7 +369,7 @@ section.salads{
     padding: 0 2em;
     color: white;
     text-transform: inherit;
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       font-size: 1rem;
       line-height: 1.5rem;
       margin-top: .7rem;
@@ -372,7 +386,7 @@ section.salads{
     color: white;
     margin-top:.6rem;
     font-weight: 900;
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       margin-top: .8rem;
     }
     span{
@@ -382,7 +396,7 @@ section.salads{
   }
   h5.note{
     margin-top: .5rem;
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       margin: .6rem 1.6em .6rem 1.6em;
       line-height: 1.2rem;
       font-size: .8rem;
@@ -407,7 +421,7 @@ section.salads{
   background: white;
   border-radius: 50%;
   margin-left: .2em;
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     font-size: .4em;
   }
 }
@@ -417,7 +431,7 @@ section.salads{
 }
 
 section.ender{
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     padding: 1em;
     padding-top: 4em;
   }
@@ -431,7 +445,7 @@ section.ender{
     text-align: left;
     line-height: 1.75em;
     color: white;
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       font-size: 1rem;
       line-height: 1.7rem;
       margin-bottom: 1em;
@@ -448,7 +462,7 @@ section.ender{
       letter-spacing: .2em;
       font-size: 1.2rem;
       text-transform: uppercase;
-      @media (max-width: 600px) {
+      @media (max-width: 800px) {
         font-size: .6rem;
         margin-top: 1em;
       }
@@ -469,7 +483,7 @@ footer p{
   font-size: .7rem;
   color: white;
   margin-top: 12em;
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     margin-top: 5em;
     text-align: center;
   }
@@ -477,7 +491,7 @@ footer p{
   span{
     color: white;
     margin: 0 1em;
-     @media (max-width: 600px) {
+     @media (max-width: 800px) {
        display: block;
        color: #231f20;
      }
