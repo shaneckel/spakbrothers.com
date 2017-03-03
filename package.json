@@ -12,11 +12,11 @@
   "author": "Shane Eckel",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.15.0"
   },
   "devDependencies":{
-    "node-sass": "^3.13.0",
-    "npm-run-all": "^3.1.1",
+    "node-sass": "^4.5.0",
+    "npm-run-all": "^4.0.2",
     "nodemon": "^1.11.0"
   }
 }
