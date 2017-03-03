@@ -63,7 +63,6 @@ body {
       font-size: 1.6em; } }
   @media (orientation: landscape) and (max-width: 800px) {
     body {
-      background: blue;
       padding: 1em 20%; } }
 
 nav.flip {
