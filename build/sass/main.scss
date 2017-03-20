@@ -108,7 +108,7 @@ nav{
   box-shadow: 0px -1px 17px 0px rgba(0,0,0,0.75);
   z-index: 100;
   @media (max-width: 800px){
-    top: -37em;
+    top: -46em;
     border: 0;
     border-bottom: 1px solid #4f4f4f;
 
@@ -280,6 +280,14 @@ p.note, h5.note{
   font-style: italic;
 }
 
+section.calzones{
+  @media (max-width: 800px) {
+    h4{
+      margin: 1em 1.6em .4em 1.6em;
+      line-height: 1.4em;
+    }
+  }
+}
 
 section.toppings{
   @media (max-width: 800px) {
@@ -323,8 +331,9 @@ section.toppings{
   }
 }
 
-// section.pizza,
 section.hoagies,
+section.calzones,
+section.specialty-pizza,
 section.wings,
 section.salads{
   h2{
