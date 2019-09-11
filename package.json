@@ -1,22 +1,15 @@
 {
   "name": "spakbrothers",
-  "version": "1.0.0",
-  "description": "Spak Brother's Pizza Shop Website",
-  "main": "server.js",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "node server.js",
-    "sass": "node-sass --include-path sass build/sass/main.scss ./build/css/main.css",
-    "watch": "nodemon -e scss -x \"npm run sass\"",
-    "dev" : "npm-run-all --parallel start watch"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
-  "author": "Shane Eckel",
-  "license": "MIT",
   "dependencies": {
-    "express": "^4.15.0"
-  },
-  "devDependencies":{
-    "node-sass": "^4.5.0",
-    "npm-run-all": "^4.0.2",
-    "nodemon": "^1.11.0"
+    "next": "9.0.4",
+    "react": "16.9.0",
+    "react-dom": "16.9.0"
   }
 }
