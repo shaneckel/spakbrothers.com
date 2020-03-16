@@ -118,9 +118,23 @@ const Home = () => {
       </nav>
 
       <main>
+        <section className="ohnoherecomesdadooooom" style={{
+          fontStyle:"normal", 
+          fontSize: ".6em", 
+          color: "white", 
+          border: "8px dashed white", 
+          padding: "2em 1em 2em 1em",
+          margin: "2em 0"
+        }}
+        >
+          <h3>Temporarily Closed</h3>
+          <p style={{ color: "white" }}>In light of recent events we have made the decision to temporarily close while we get a handle on the best path going forward.</p>
+          <p style={{ color: "white" }}>This is a difficult decision to make but we are confident that it's time for action now to protect our staff, customers, and society as a whole.</p>
+          <p style={{ color: "white" }}>We will be open as soon as possible to serve you your Spak fix and we thank you so much for your understanding during this uncertain time. Stay tuned for updates as things are sure to change as things unfold.</p>
+        </section>
+
         <header>
           <img src="static/img/header-full.png" alt="Spak Brothers Pizza" />
-          <h3>We are closed September 1st, 2nd, and 3rd.</h3>
         </header>
 
         <section id="phone" className="phone">
