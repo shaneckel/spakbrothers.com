@@ -1,52 +1,15 @@
 import React from 'react'
 import Head from 'next/head'
+import { RichText, Date } from 'prismic-reactjs'
+import { format } from 'date-fns'
+import Prismic from 'prismic-javascript'
 
-const Home = () => {
+const client = Prismic.client('https://spakbrothers.cdn.prismic.io/api/v2')
+
+const Home = (props) => {
+  const mainData = props.prismicRequest.results[0];
 
   if (process.browser) {
-    let lastScrollY = 0;
-    let ticking = !1;
-    
-    function scrollSwag () {
-      lastScrollY = window.pageYOffset, requestTick()
-    }
-
-    function requestTick () {
-      ticking || (window.requestAnimationFrame(updatePosition), ticking = !0)
-    }
-
-    function updateNav (e) {
-      Array.prototype.forEach.call(document.querySelectorAll("nav > a"), function(e) {
-        e.classList.remove("active")
-      }), e.classList.add("active")
-    }
-
-    function lup (linkArray){
-      Array.prototype.forEach.call(linkArray, function(nameId) {
-        100 * Math.ceil((document.querySelectorAll("#" + nameId)[0].offsetTop - 200) / 100) === 100 * Math.ceil(lastScrollY / 100) && updateNav(document.querySelectorAll(".l" + nameId)[0]);
-      })
-    }
-
-    function updatePosition () {
-      let link = ['phone', 'location', 'hours', 'pizza', 'specialty', 'toppings', 'hoagies', 'wings', 'salads', 'calzones']
-      lup(link)
-      ticking = !1;
-    }
-
-    function trans (e) {
-      Array.prototype.forEach.call(document.querySelectorAll("nav > a"), function(e) {
-        e.classList.remove("active")
-      }),
-      e.target.classList.add("active")
-      if(!e.target.classList.contains("menu")){
-        console.log(document.querySelectorAll(".menu"))
-        document.querySelectorAll(".menu")[0].text = "menu"
-        document.querySelectorAll("nav")[0].classList.toggle("flip")
-      }else{
-        console.log("do nothing");
-      }
-    };
-
     document.querySelectorAll(".menu")[0].addEventListener("click", function(e) {
       e.preventDefault(),
       e.target.text =
@@ -54,10 +17,7 @@ const Home = () => {
           ? "menu"
           : "close menu",
         document.querySelectorAll("nav")[0].classList.toggle("flip")
-    }),
-
-    window.addEventListener("scroll", scrollSwag, !1),
-    document.querySelectorAll("nav")[0].addEventListener("click", trans, !1)
+    })
   }
 
   return (
@@ -104,333 +64,74 @@ const Home = () => {
       	<meta name="theme-color" content="#231f20" />
       </Head>
       <nav>
-         <a href="#phone" className="lphone">phone</a>
          <a href="#location" className="llocation">location</a>
          <a href="#hours" className="lhours">hours</a>
-         <a href="#pizza" className="lpizza">pizza</a>
-         <a href="#toppings" className="ltoppings">toppings</a>
-         <a href="#specialty" className="lspecialty">specialty pizza</a>
-         <a href="#hoagies" className="lhoagies">hoagies</a>
-         <a href="#wings" className="lwings">wings & sides</a>
-         <a href="#salads" className="lsalads">salads</a>
-         <a href="#calzones" className="lcalzones">calzones</a>
+         <a href="https://www.toasttab.com/spak-brothers/v3" style={{ background: "white", color: "black" }}>ORDER HERE</a> 
          <a href="" className="menu">menu</a>
       </nav>
 
       <main>
-        <section className="ohnoherecomesdadooooom" style={{
-          fontStyle:"normal", 
-          fontSize: ".6em", 
-          color: "white", 
-          border: "8px dashed white", 
-          padding: "2em 1em 2em 1em",
-          margin: "2em 0"
-        }}
-        >
-          <h3>Temporarily Closed</h3>
-          <p style={{ color: "white" }}>In light of recent events we have made the decision to temporarily close while we get a handle on the best path going forward.</p>
-          <p style={{ color: "white" }}>This is a difficult decision to make but we are confident that it's time for action now to protect our staff, customers, and society as a whole.</p>
-          <p style={{ color: "white" }}>We will be open as soon as possible to serve you your Spak fix and we thank you so much for your understanding during this uncertain time. Stay tuned for updates as things are sure to change as things unfold.</p>
-        </section>
-
-        <header>
-          <img src="static/img/header-full.png" alt="Spak Brothers Pizza" />
+        <header style={{
+          paddingTop:"3em"
+        }}>
+          <img src="static/img/header-new-full.jpg" alt="Spak Brothers Pizza" />
         </header>
 
-        <section id="phone" className="phone">
-          <h2><a href="tel:4123627725">412-362-SPAK (7725)</a></h2>
-          <h3>Limited Business Delivery Only</h3>
+        <section className="head" style={{
+          fontStyle:"normal", 
+          color: "white",
+          marginTop: "1.8em",
+          paddingTop: 0,
+          borderTop: 0
+        }}>
+          <h2 style={{ textAlign: "center", fontWeight: "300"}}>Ordering Spak is now done <strong style={{fontWeight: "900"}}>only</strong> online.</h2>
+          <p style={{ textAlign: "center", paddingTop: "1.6em", margin: "1em auto 0 auto"}}>
+            <a className="button" style={{fontWeight:"900", textDecoration: "none", color: "#231f20", fontSize:"1.6em"}} href="https://www.toasttab.com/spak-brothers/v3">ORDER HERE</a> 
+          </p>
         </section>
-
+        
+        <section className="news" style={{
+          fontStyle:"normal", 
+          color: "white"
+        }}>
+          <h2 style={{ textAlign: "left" }}>Can I call you?</h2>
+          <p>Currently <strong style={{fontWeight: "900"}}>no</strong>. We don't use our phone. We have a service email <a href="mailto:spakhelp@gmail.com">spakhelp@gmail.com</a> that you can email with questions.</p>
+          <h2 style={{ textAlign: "left", paddingTop: "1.6em" }}>What service do you use for ordering?</h2>
+          <p>We use <a href="https://www.toasttab.com/spak-brothers/v3">Toast</a>, which will show you what menu items we have available. There's also an App for <a href="https://play.google.com/store/apps/details?id=com.toasttab.consumer&hl=en_US&gl=US">Google</a> and <a href="https://apps.apple.com/us/app/toast-takeout-delivery/id1362180579">Apple</a>.</p>
+          <h2 style={{ textAlign: "left", paddingTop: "1.6em" }}>I didn't recieve a text message.</h2>
+          <p>Sometimes Toast doesn't work perfectly and you don't recieve a message. If you never recieved a text simply email <a href="mailto:spakhelp@gmail.com">spakhelp@gmail.com</a> for more help.</p>
+          <h2 style={{ textAlign: "left", paddingTop: "1.6em" }}>I didn't recieve my estimated order time.</h2>
+          <p>Toast provides you with an estimated time and an order number. If you never recieved one, just email <a href="mailto:spakhelp@gmail.com">spakhelp@gmail.com</a> for assistance.</p>
+        </section>
+        
+        <section className="news" style={{
+          fontStyle:"normal", 
+          color: "white"
+        }}>
+          <h2 style={{ textAlign: "left" }}>Updates</h2>
+          <h3 style={{ textAlign: "left", fontSize: "0.6em", paddingBottom: ".3em", paddingTop:".2em"}}>{ format(new Date(mainData.last_publication_date), 'MMMM do, yyyy')}</h3>
+          <div style={{ color: "white", textAlign:"left"}}>
+            {RichText.render(mainData.data.body)}
+          </div>
+        </section>
+        
+        <section id="hours" className="hours">
+          <h2 style={{ textAlign: "left" }}>Hours</h2>
+          <div style={{ textAlign: "left"}}>
+            <h4>TUESDAY - SUNDAY</h4>
+            <h5>3pm - 9pm</h5>
+          </div>    
+          <div style={{ textAlign: "left" }}>
+            <h4>MONDAY</h4>
+            <h5>Closed</h5>
+          </div>
+        </section>
+        
         <section id="location" className="location">
           <img src="static/img/hoagie-divider.png" alt="divider" />
           <h2><a href="http://maps.google.com/maps?f=q&amp;amp;hl=en&amp;amp;geocode=&amp;amp;q=5107+Penn+Avenue,+Pittsburgh+Pa&amp;amp;sll=40.473018,-79.953524&amp;amp;sspn=0.041722,0.111494&amp;amp;ie=UTF8&amp;amp;ll=40.465552,-79.942542&amp;amp;spn=0.005477,0.013937&amp;amp;z=17" target="_new">5107 Penn Avenue</a></h2>
           <h3>Pittsburgh, Pa</h3>
         </section>
-
-        <section id="hours" className="hours">
-          <h2>Hours</h2>
-          <div>
-            <h5>11a - 10p</h5>
-            <h4>MON - THURS</h4>
-          </div>
-          <div>
-            <h5>11a - 11p</h5>
-            <h4>FRIDAY</h4>
-          </div>
-          <div>
-            <h5>12p - 11p</h5>
-            <h4>SATURDAY</h4>
-          </div>
-          <div>
-            <h5>3p - 10p</h5>
-            <h4>SUNDAY</h4>
-          </div>
-        </section>
-
-        <section id="pizza" className="pizza">
-          <img src="static/img/pizza-full.png" alt="Pizza" />
-
-          <h2>18" xl • 12 cut – <sup>$</sup>13.49</h2>
-          <h3>Toppings <sup>$</sup>2 each</h3>
-
-          <h2>14" lg • 8 cut – <sup>$</sup>10.49</h2>
-          <h3>Toppings <sup>$</sup>1.75 each</h3>
-
-          <h2>10" sm • 6 cut – <sup>$</sup>7.99</h2>
-          <h3>Toppings <sup>$</sup>1.50 each</h3>
-
-          <h2>Single slice – <sup>$</sup>2</h2>
-          <h3>Toppings <sup>$</sup>.50 each</h3>
-        </section>
-
-        <section id="toppings" className="toppings">
-          <img src="static/img/toppings-full.png" alt="Pizza Toppings" />
-          <h3>Buy 3 Toppings and get the 4th free.</h3>
-          <p className="note">*Double Toppings (excluded)</p>
-          <ul>
-            <li className="header">Veggies</li>
-            <li>Green Pepper</li>
-            <li>Onion</li>
-            <li>Fresh Mushroom</li>
-            <li>Banana Pepper</li>
-            <li>Japapeño Pepper</li>
-            <li>Black Olive</li>
-            <li>Roasted Tomato</li>
-            <li>Pineapple</li>
-            <li>Spinach</li>
-            <li>Portobello</li>
-            <li>Kalamata Olive</li>
-            <li>Fresh Basil</li>
-            <li>Artichoke</li>
-            <li>Roasted Red Pepper</li>
-            <li>Broccoli</li>
-
-            <li className="hippy header">Veggie Subsitute</li>
-            <li>Sausage*</li>
-            <li>Pepperoni*</li>
-            <li>Vegan Mozzarella</li>
-
-            <li className="header">Cheese</li>
-            <li>Extra Cheese</li>
-            <li>Cheddar</li>
-            <li>Feta*</li>
-            <li>Ricotta*</li>
-
-            <li className="header">Meat</li>
-            <li>Peperoni</li>
-            <li>Capicola*</li>
-            <li>Bacon</li>
-            <li>Hot Sausage</li>
-            <li>Meatball</li>
-            <li>Anchovy</li>
-            <li>Steak*</li>
-            <li>Chicken*</li>
-            <li>Soppresata*</li>
-          </ul>
-          <p className="hippy note">Vegan Option Available</p>
-        </section>
-
-        <section id="specialty" className="specialty specialty-pizza">
-          <img src="static/img/specialty-full.png" alt="specialty pizza" />
-
-          <h2>Pizza Margherita</h2>
-          <p>sm – <sup>$</sup>10.99 <span>/</span> lg – <sup>$</sup>13.49 <span>/</span> xl – <sup>$</sup>15.99</p>
-          <h3>Fresh Mozzarella, Fresh Basil, Extra Virgin Olive Oil, Plum Tomato Sauce</h3>
-
-          <h2>White Pizza</h2>
-          <p>sm – <sup>$</sup>10.99 <span>/</span> lg – <sup>$</sup>13.49 <span>/</span> xl – <sup>$</sup>15.99</p>
-          <h3>Roasted Tomato, Ricotta, Olive Oil with Herbs and Garlic</h3>
-
-          <h2 className="hippy">Buffalo Chicken or Seitan</h2>
-          <p>sm – <sup>$</sup>12.99 <span>/</span> lg – <sup>$</sup>15.49 <span>/</span> xl – <sup>$</sup>17.99</p>
-          <h3>House Buffalo Sauce, Chicken, Onions, Celery, with Ranch on the side</h3>
-
-          <h2 className="hippy">BBQ Chicken or Seitan</h2>
-          <p>sm – <sup>$</sup>12.99 <span>/</span> lg – <sup>$</sup>15.49 <span>/</span> xl – <sup>$</sup>17.99</p>
-          <h3>House BBQ Sauce, Grilled Chicken, Onions, Cheddar, Fresh Cilantro</h3>
-
-          <h2>Dealer's Choice</h2>
-          <p>(Market Price)</p>
-          <h3>*Rotating Pie Dreamed Up By The Spak Crew</h3>
-
-          <h5 className="note">*Ask For Current Pie</h5>
-        </section>
-
-        <section id="hoagies" className="hoagies">
-          <img src="static/img/hoagies-full.png" alt="hoagies" />
-          <h1>Meat</h1>
-
-          <h2>Italian*</h2>
-          <p>6" – <sup>$</sup>5.99<span>/</span> 12" – <sup>$</sup>10.49</p>
-          <h3>Capicolla, Salami, Soppressata, Provolone, Lettuce, Tomato, Onion, Italian Dressing</h3>
-          <h5 className="note">*Cured meats sourced from Parma Sausage Company in the Strip</h5>
-
-          <h2>Steak & Cheese</h2>
-          <p>6" – <sup>$</sup>5.99 <span>/</span> 12" – <sup>$</sup>10.49</p>
-          <h3>Provolone, Lettuce, Tomato, Onion, Mayo</h3>
-
-          <h2>Pittsburgh Steak</h2>
-          <p>6" – <sup>$</sup>6.49 <span>/</span> 12" – <sup>$</sup>11.49</p>
-          <h3>Provolone, Egg, Fries, Mushroom, Green Pepper, Onion, Banana Peppers, Lettuce, Tomato, Mayo</h3>
-
-          <h2>Blue Steak</h2>
-          <p>6" – <sup>$</sup>5.99 <span>/</span> 12" – <sup>$</sup>10.49</p>
-          <h3>Provolone, Onion, Green Pepper, Mushroom, Mayo</h3>
-
-          <h2>Tuna Melt</h2>
-          <p>6" – <sup>$</sup>5.99 <span>/</span> 12" – <sup>$</sup>10.49</p>
-          <h3>Tuna Salad with Apples, Cheddar, Lettuce, Tomato</h3>
-
-          <h2>Meatball</h2>
-          <p>6" – <sup>$</sup>5.99 <span>/</span> 12" – <sup>$</sup>10.49</p>
-          <h3>Pork and Beef Meatballs, Provolone, Marinara Sauce</h3>
-
-          <h2>Chicken</h2>
-          <p>6" – <sup>$</sup>5.99 <span>/</span> 12" – <sup>$</sup>10.49</p>
-          <h3>Fried or Grilled Chicken, Provolone, Lettuce, Tomato, Onion, Italian Dressing</h3>
-
-          <h2>Buffalo / BBQ Chicken</h2>
-          <p>6" – <sup>$</sup>5.99 <span>/</span> 12" – <sup>$</sup>10.49</p>
-          <h3>Fried or Grilled Chicken, Provolone, Lettuce, Tomato, Onion, Sauce</h3>
-
-          <h2>Chicken Parmesan</h2>
-          <p>6" – <sup>$</sup>5.99 <span>/</span> 12" – <sup>$</sup>10.49</p>
-          <h3>Fried or Grilled Chicken, Marinara, Provolone</h3>
-
-          <h1>Vegetarian & Vegan</h1>
-
-          <h2 className="hippy">Portobello</h2>
-          <p>6" – <sup>$</sup>5.99 <span>/</span> 12" – <sup>$</sup>10.49</p>
-          <h3>Rosemary Marinated Portobello, Onion, Provolone, Lettuce, Tomato, Italian Dressing</h3>
-
-          <h2 className="hippy">Seitan Melt</h2>
-          <p>6" – <sup>$</sup>5.99 <span>/</span> 12" – <sup>$</sup>10.49</p>
-          <h3>Buffalo or BBQ Sauce, Provolone, Lettuce, Tomato, Onion</h3>
-
-          <h2 className="hippy">Seitan "Cheese Steak"</h2>
-          <p>6" – <sup>$</sup>5.99 <span>/</span> 12" – <sup>$</sup>10.49</p>
-          <h3>Provolone, Green Pepper, Mushroom, Lettuce, Tomato, Onion, Mayo</h3>
-
-          <h2 className="hippy">Seitan Pittsburgh "Steak"</h2>
-          <p>6" – <sup>$</sup>6.49 <span>/</span> 12" – <sup>$</sup>11.49</p>
-          <h3>Provolone, Egg, Fries, Mushroom, Green Pepper, Onion, Banana Peppers, Lettuce, Tomato, Mayo</h3>
-
-          <aside className="extras">
-            <div>
-              <h2>Double Meat</h2>
-              <h3>6" - <sup>$</sup>2 <span>/</span> 12" - <sup>$</sup>4</h3>
-            </div>
-
-            <div>
-              <h2>Extra Cheese</h2>
-              <h3>6" - <sup>$</sup>1 <span>/</span> 12" - <sup>$</sup>2</h3>
-            </div>
-
-            <div>
-              <h2>Vegan Cheese</h2>
-              <h3>6" - <sup>$</sup>1 <span>/</span> 12" - <sup>$</sup>2</h3>
-            </div>
-
-            <div>
-              <h2>Vegenaise</h2>
-              <h3>6" - <sup>$</sup>.50 <span>/</span> 12" - <sup>$</sup>1</h3>
-            </div>
-
-          </aside>
-          <h5 className="note">(Not Vegan Unless Specified)</h5>
-        </section>
-
-        <section id="wings" className="wings">
-          <img src="static/img/wings-full.png" alt="wings & Sides" />
-
-          <h2>Wings</h2>
-          <p>10 – <sup>$</sup>6.99 <span>/</span> 20 – <sup>$</sup>12.99</p>
-          <h3><span>sauces:</span> Buffalo, Hickory BBQ, Honey Mustard, Garlic Parmesan, or Season Salt</h3>
-          <h5 className="note">Served with a Side of Ranch or Blue Cheese</h5>
-
-          <h2 className="hippy">Seitan Wings</h2>
-          <p><sup>$</sup>6.49</p>
-          <h3>Choose Any of Our Sauces Served With a Side Of Ranch or Blue Cheese.</h3>
-          <h5 className="note">Our BBQ Sauce and Honey Mustard are Vegan. Vegan Buffalo Sauce and Vegan Ranch Dressing are Available Upon Request</h5>
-
-          <h2 className="hippy">Breadsticks</h2>
-          <p><sup>$</sup>5.99</p>
-          <h3>Served with a side of marinara sauce</h3>
-
-          <h2 className="hippy">Cheese Breadsticks</h2>
-          <p><sup>$</sup>7.49</p>
-          <h3>Served with a side of marinara sauce</h3>
-
-          <h2 className="hippy">French Fries</h2>
-          <p><sup>$</sup>2.99</p>
-          <h3>Regular or Curly</h3>
-
-          <h2 className="hippy">Cheese Fries</h2>
-          <p><sup>$</sup>4.49</p>
-          <h3>Regular or Curly, Covered in your choice of cheddar sauce or melted provolone</h3>
-
-          <h2>Chicken Tenders</h2>
-          <p>3 – <sup>$</sup>4.99 <span>/</span> 6 – <sup>$</sup>7.99</p>
-          <h3>Served with Your Choice of Ranch, BBQ, Buffalo, Honey Mustard, or Ketchup</h3>
-
-          <h2>Chicken Tenders & French Fries Combo</h2>
-          <p>SM – <sup>$</sup>6.49 <span>/</span> LG – <sup>$</sup>9.49</p>
-          <h3>Three or Six Chicken Tenders and French Fries Served with Your Choice of Ranch, BBQ, Buffalo, Honey Mustard, or Ketchup</h3>
-        </section>
-
-        <section id="salads" className="salads">
-          <img src="static/img/salads-full.png" alt="salads" />
-
-          <h2 className="hippy">Garden</h2>
-          <p>SM – <sup>$</sup>4.99 <span>/</span> LG – <sup>$</sup>8.99</p>
-          <h3>Baby Field Greens, Tomato, Onion, Cucumber, Banana Pepper, Green Pepper</h3>
-          <h5 className="note">Add Chicken, Steak, or Seitan for <sup>$</sup>2</h5>
-
-          <h2 className="hippy">Mediterranean</h2>
-          <p>SM – <sup>$</sup>5.99 <span>/</span> LG – <sup>$</sup>9.99</p>
-          <h3>Baby Field Greens, Kalamata Olive, Feta, Cucumber, Tomato, Banana Pepper</h3>
-          <h5 className="note">Add Chicken, Steak, or Seitan for <sup>$</sup>2</h5>
-
-          <h2>Chicken</h2>
-          <p>LG – <sup>$</sup>11.99</p>
-          <h3>Fried or Grilled Chicken, Fries, Cheese, Lettuce, Tomato, Cucumber, Onion</h3>
-
-          <h2>Steak</h2>
-          <p>LG – <sup>$</sup>11.99</p>
-          <h3>Steak, Fries, Cheese, Lettuce, Tomato, Cucumber, Onion</h3>
-
-          <h2 className="hippy">Seitan</h2>
-          <p>LG – <sup>$</sup>11.99</p>
-          <h3>Seitan, Fries, Cheese, Lettuce, Tomato, Cucumber, Onion</h3>
-
-          <h2 className="hippy">Dressings</h2>
-          <h3>House Ranch, House Italian, Bleu Cheese, Rosemary Balsamic, Carrot Ginger, Vegan Ranch (<sup>$</sup>1)</h3>
-        </section>
-
-        <section id="calzones" className="calzones">
-          <img src="static/img/calzones-full.png" alt="calzones" />
-          <h4 className="shout">Filled with ricotta and mozzarella, and served with a side of marinara sauce</h4>
-
-          <h2>Build your own</h2>
-          <p><sup>$</sup>11.99</p>
-          <h3>Pick Any Two <a href="#toppings">Toppings</a></h3>
-          <h5 className="note">Additional <a href="#toppings">Toppings</a> – <sup>$</sup>1.69</h5>
-
-          <h2>italian</h2>
-          <p><sup>$</sup>11.99</p>
-          <h3>Salami, Capicolla, and Soppressata from Parma Sausage</h3>
-
-          <h2>Meatball</h2>
-          <p><sup>$</sup>11.99</p>
-          <h3>Pork and Beef Meatballs, Cheesee</h3>
-
-          <h2 className="hippy">Veggie Lover</h2>
-          <p><sup>$</sup>11.99</p>
-          <h3>Pick Any Three <a href="#toppings">Toppings</a> from the <a href="#toppings">Veggie List</a>.</h3>
-          <h5 className="note">Additional <a href="#toppings">Toppings</a> – <sup>$</sup>1.69</h5>
-        </section>
-
 
         <section className="ender">
           <h2>We Are What We Eat</h2>
@@ -440,16 +141,24 @@ const Home = () => {
             <a href="https://twitter.com/SpakBrothers">Twitter</a>
             <a href="https://www.facebook.com/Spak-Brothers-Pizza-115480515141914/?fref=ts">Facebook</a>
           </div>
-          <img src="static/img/footer-full.png" alt="spak brothers pizza" />
-          <h5 className="note"></h5>
         </section>
 
         <footer>
-          <p>All Prices & Items Subject To Change <span>|</span> © Spak Brothers. All rights reserved. <span>|</span> Pittsburgh, Pa <span>|</span> 2019</p>
+          <p>All Prices & Items Subject To Change <span>|</span> © Spak Brothers. All rights reserved. <span>|</span> Pittsburgh, Pa <span>|</span> 2021</p>
         </footer>
       </main>
     </div>
   )
+}
+
+Home.getInitialProps = async (context ) => {
+  const prismicRequest = await client.query(
+    Prismic.Predicates.at('document.type', 'news')
+  )
+  if (context.res) {
+    context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate')
+  }
+  return { prismicRequest }
 }
 
 export default Home
